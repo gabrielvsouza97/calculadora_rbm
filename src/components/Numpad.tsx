@@ -5,30 +5,13 @@ type btnProps = {
   };
 
 export default function Button(props : btnProps){
-
-    const btn = Object( {
-        "C": "Clear",
-        "D": "Delete"
-    });
-    let botoes = "";
-
-    for(const button in btn){
-        botoes += createElement(button)
-    }
-    function createElement(chave : string){
-        let ob = document.createElement("button");
-        ob.setAttribute("onClick","{()=>{retornaValor(\""+chave+"\");}");
-        ob.innerText = btn[chave];
-        return ob;
-    }
     function retornaValor(texto:string){
         props.onClick(texto);
     }
 
     return (
     <div className="numpad">
-        {botoes}
-          {/* <button onClick={()=>{retornaValor("C");}} className='btn-function'>AC</button>
+          <button onClick={()=>{retornaValor("C");}} className='btn-function'>AC</button>
           <button onClick={()=>{retornaValor("D");}} className='btn-function'>DEL</button>
           <button onClick={()=>{retornaValor("/");}} className='btn-function' >/</button>
           <button onClick={()=>{retornaValor("7");}}>7</button>
@@ -45,7 +28,7 @@ export default function Button(props : btnProps){
           <button onClick={()=>{retornaValor("+");}} className='btn-function'>+</button>
           <button onClick={()=>{retornaValor("0");}}>0</button>
           <button onClick={()=>{retornaValor(",");}}>,</button>
-          <button onClick={()=>{retornaValor("=");}} className='btn-function'>=</button> */}
+          <button onClick={()=>{retornaValor("=");}} className='btn-function'>=</button>
 
     </div>
 

@@ -1,3 +1,5 @@
+@import url(./reset.css);
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +12,85 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  border-radius: 10px;
+  position: relative;
+}
+
+
+.App .content-Display
+{
+display: flex;
+height: 60px;
+width: 300px;
+align-items: center;
+justify-content: right;
+font-size: 20pt;
+background-color: rgb(90, 90, 90);
+color: white;
+letter-spacing: 4px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+
+.App .content-Display span {
+  margin-right: 10px;
+}
+.App .numpad {
+  width:300px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+.App .numpad button {
+  width : 75px;
+  height: 60px;
+  font-size: 18pt;
+  font-weight: 100;
+  color: white;
+  background-color: rgb(68, 68, 68);
+  border: 1px solid rgb(60, 60, 60);
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  
+}
+
+.App .numpad button:hover {
+  background-color: rgb(50, 50, 50);
+  border-color: rgb(50, 50, 50);
+}
+.App .numpad button:active {
+  border: 3px solid rgb(100,100,100) ;
+}
+
+.App .numpad button:nth-child(1), 
+.App .numpad button:nth-child(16){
+  width: 150px;
+}
+
+.App .numpad button:nth-child(16){
+  border-bottom-left-radius: 10px;
+}
+.App .numpad button:nth-child(18){
+  border-bottom-right-radius: 10px;
+}
+
+.App .numpad button.btn-function {
+   background-color: #ff9e0b;
+   border-color: #c97c02;
+   transition: .3s ease-in;
+}
+.App .numpad button.btn-function:hover {
+   background-color: #c97c02;
+}
+.App .numpad button.btn-function:active {
+   border: 3px solid #935b00;
 }

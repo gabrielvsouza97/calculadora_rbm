@@ -1,25 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { ReactElement, useState } from 'react';
 import './App.css';
+import Numpad from './components/Numpad';
+import Display from './components/Display';
+import { stringify } from 'querystring';
+
 
 function App() {
+  const [display,setDisplay] = useState("");
+
+  function exibeDisplay(resultado: string){
+
+
+    let valorInserir = verificaUltimoDigito(resultado);
+    setDisplay(valorInserir);
+  }
+
+  function calculadora(lastText : string)
+  {
+    //Verificando qual o que preciso fazer
+    switch (lastText){
+      case "C":
+        setDisplay("");
+        break;
+      case "D":
+        setDisplay(retiraTexto());
+        break;
+      case "=":
+        setDisplay(realizaCalculo());
+        break;
+      default:
+        exibeDisplay(lastText);
+        break;
+
+    }
+  }
+  function retiraTexto(){
+    let novoTexto = display.substring(0, display.length -1);
+    return novoTexto;
+
+  }
+
+  function realizaCalculo(){
+    let stringSanitizada = sanitizaString(display);
+    let calculo = Math.round((eval(stringSanitizada) + Number.EPSILON ) * 100 ) / 100;
+    let stringcalc = calculo+"";
+    return stringcalc.replaceAll(".",",");
+  }
+
+  function sanitizaString(stringSuja: string){
+    let stringLimpa = stringSuja.replaceAll("x","*");
+    stringLimpa = stringLimpa.replaceAll(",", ".");
+
+    return stringLimpa;
+  }
+
+  function verificaUltimoDigito(resultado :string){
+    const sinais = ["+","-","/","x"];
+    const ultimoDigito = display.substring(display.length-1);
+    if(sinais.includes(resultado) && sinais.includes(ultimoDigito)){
+      return display.substring(0, display.length -1) + resultado;
+    } else {
+      return display + resultado;
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <span className='App'>
+       <Display>{display}</Display>
+        <Numpad onClick={(resultado:string) => {calculadora(resultado)}}/>
+      </span>
+    </main>
   );
 }
 
